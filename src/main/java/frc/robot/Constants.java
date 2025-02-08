@@ -33,13 +33,13 @@ public final class Constants {
    
 
   //SparkMax CAN ID's
-  public static final int kBackRightDrivingTalonId = 1;
+ public static final int kBackRightDrivingTalonId = 1;
   public static final int kFrontRightDrivingTalonId = 0;
   public static final int kFrontLeftDrivingTalonId = 2;
-  public static final int kBackLeftDrivingTalonId = 3;
+  public static final int kBackLeftDrivingTalonId = 4;
 
-  public static final int kFrontLeftTurningId = 3;
-  public static final int kFrontRightTurningId = 7;
+  public static final int kFrontLeftTurningId = 6;
+  public static final int kFrontRightTurningId = 8;
   public static final int kBackLeftTurningId = 5;
   public static final int kBackRightTurningId = 2; 
 
@@ -48,4 +48,5 @@ public final class Constants {
   public static final double kMaxSpeedMetersPerSecond = 4.8;
   public static final double kMaxAngularSpeed = 2 * Math.PI; // radians per second
   public static final boolean kGyroReversed = false;
+  
 }

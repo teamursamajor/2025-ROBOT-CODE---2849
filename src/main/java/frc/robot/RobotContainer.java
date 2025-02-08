@@ -7,9 +7,12 @@ package frc.robot;
 import frc.robot.Constants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.PullCoral;
+import frc.robot.commands.PushCoral;
 import frc.robot.subsystems.AprilTagSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.NeoSubsystem;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.XboxController;
@@ -42,9 +45,11 @@ public class RobotContainer {
   
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  public DriveSubsystem m_robotDrive = new DriveSubsystem(); 
+  // public DriveSubsystem m_robotDrive = new DriveSubsystem(); 
   private AprilTagSubsystem m_aprilTag = new AprilTagSubsystem();
 
+  
+  private final NeoSubsystem coralpushpullsubsystem = new NeoSubsystem();
   // The driver's controller(s)
   XboxController m_driverController = new XboxController(0);
 
@@ -56,7 +61,7 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
-    //configureBindings();
+    configureBindings();
 
      // Configure default commands
     /* m_robotDrive.setDefaultCommand(
@@ -91,7 +96,9 @@ public class RobotContainer {
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
     Constants.xboxController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
-    
+    Constants.xboxController.x().whileTrue(new PullCoral(coralpushpullsubsystem));
+    Constants.xboxController.a().whileTrue(new PushCoral(coralpushpullsubsystem));
+
   }
 
   /**
