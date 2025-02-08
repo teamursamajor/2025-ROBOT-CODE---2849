@@ -23,7 +23,7 @@ import frc.utils.SwerveUtils;
 import com.studica.frc.AHRS;
 
 public class DriveSubsystem extends SubsystemBase {
-  AHRS ahrs = new AHRS(AHRS.NavXComType.kMXP_SPI);  
+  AHRS ahrs = new AHRS(AHRS.NavXComType.kMXP_SPI);;  
   
   public static final SwerveDriveKinematics kDriveKinematics = new SwerveDriveKinematics(
         new Translation2d(Constants.kWheelBase / 2, Constants.kTrackWidth / 2),

@@ -15,6 +15,7 @@ import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
+
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
@@ -95,6 +96,7 @@ public class MAXSwerveModule {
   int m_drivingCANId;
 
   public SparkMaxConfig config = new SparkMaxConfig();
+  
 
 
   public void invertTalon(){
@@ -135,6 +137,8 @@ public class MAXSwerveModule {
     
     m_turningPIDController.setReference(1.0, ControlType.kDutyCycle);
 
+    double turningFactor = 2 * Math.PI;
+
 
     
     // Apply position and velocity conversion factors for the driving encoder. The
@@ -144,7 +148,8 @@ public class MAXSwerveModule {
     //m_drivingConfiguration.setVelocityConversionFactor(ModuleConstants.kDrivingEncoderVelocityFactor);
     TalonFXConfiguration m_drivingConfiguration = new TalonFXConfiguration();
    
-    config.idleMode(kTurningMotorIdleMode)
+    config
+    .idleMode(kDrivingMotorIdleMode)
     .smartCurrentLimit(20); //amps
     config.absoluteEncoder
     .positionConversionFactor(kTurningEncoderPositionFactor)
@@ -162,7 +167,7 @@ public class MAXSwerveModule {
     m_turningSparkMax.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
     // Invert the turning encoder, since the output shaft rotates in the opposite direction of
-    // the steering motor in the MAXSwerve Module.
+    // the steerig motor in the MAXSwerve Module.
     //may or may not need to be inverted
   //  config.absoluteEncoder
   //  .inverted(kTurningEncoderInverted);
@@ -206,8 +211,8 @@ public class MAXSwerveModule {
     //m_turningSparkMax.burnFlash();
 
 
-    m_turningSparkMax.configure(config, ResetMode.kResetSafeParameters,
-        PersistMode.kPersistParameters);
+    // m_turningSparkMax.configure(config, ResetMode.kResetSafeParameters,
+    //     PersistMode.kPersistParameters);
 
     m_chassisAngularOffset = chassisAngularOffset;
     m_desiredState.angle = new Rotation2d(m_turningEncoder.getPosition());

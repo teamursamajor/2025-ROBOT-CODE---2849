@@ -45,11 +45,10 @@ public class RobotContainer {
   
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  // public DriveSubsystem m_robotDrive = new DriveSubsystem(); 
+  public DriveSubsystem m_robotDrive = new DriveSubsystem(); 
   private AprilTagSubsystem m_aprilTag = new AprilTagSubsystem();
-
-  
   private final NeoSubsystem coralpushpullsubsystem = new NeoSubsystem();
+
   // The driver's controller(s)
   XboxController m_driverController = new XboxController(0);
 
@@ -64,7 +63,7 @@ public class RobotContainer {
     configureBindings();
 
      // Configure default commands
-    /* m_robotDrive.setDefaultCommand(
+     m_robotDrive.setDefaultCommand(
         // The left stick controls translation of the robot.
         // Turning is controlled by the X axis of the right stick.
          new RunCommand(
@@ -74,7 +73,7 @@ public class RobotContainer {
                 -MathUtil.applyDeadband(m_driverController.getRightX(), kDriveDeadband),
                 false),
             m_robotDrive));
-    */
+    
 
   }
             
@@ -98,7 +97,7 @@ public class RobotContainer {
     Constants.xboxController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
     Constants.xboxController.x().whileTrue(new PullCoral(coralpushpullsubsystem));
     Constants.xboxController.a().whileTrue(new PushCoral(coralpushpullsubsystem));
-
+    
   }
 
   /**
