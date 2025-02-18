@@ -1,4 +1,4 @@
-package frc.robot.subsystems;
+package frc.robot.subsystems.Drive;
 
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.MotorOutputConfigs;
@@ -18,6 +18,7 @@ import com.revrobotics.spark.SparkMax;
 
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
+import com.revrobotics.spark.config.ClosedLoopConfig.FeedbackSensor;
 
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -156,6 +157,7 @@ public class MAXSwerveModule {
     .velocityConversionFactor(kTurningEncoderVelocityFactor)
     .inverted(kTurningEncoderInverted);
     config.closedLoop
+    .feedbackSensor(FeedbackSensor.kAbsoluteEncoder)
     .positionWrappingEnabled(true)
     .positionWrappingInputRange(kTurningEncoderPositionPIDMinInput, kTurningEncoderPositionPIDMaxInput)
     .pidf(kTurningP, kTurningI, kTurningD, kTurningFF)

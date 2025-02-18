@@ -1,4 +1,4 @@
-package frc.robot.subsystems;
+package frc.robot.subsystems.AprilTag;
 
 import org.photonvision.PhotonCamera;
 import org.photonvision.PhotonUtils;
@@ -19,6 +19,7 @@ public class AprilTagAlign {
     double pitch;
     double distance;
     double id;
+
 
     public AprilTagAlign(double yaw, double pitch, double distance, double id){
         this.yaw = yaw;

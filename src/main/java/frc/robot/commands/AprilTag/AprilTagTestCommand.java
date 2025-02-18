@@ -1,8 +1,11 @@
-package frc.robot.commands;
+package frc.robot.commands.AprilTag;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.AprilTagAlign;
-import frc.robot.subsystems.AprilTagSubsystem;
+import frc.robot.subsystems.AprilTag.AprilTagAlign;
+import frc.robot.subsystems.AprilTag.AprilTagSubsystem;
+import edu.wpi.first.units.measure.Distance;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class AprilTagTestCommand extends Command {
 
@@ -20,7 +23,7 @@ public class AprilTagTestCommand extends Command {
     }
 
 
-    AprilTagAlign target = aprilTag.targetValues();
+    
     
 
 
@@ -33,6 +36,13 @@ public class AprilTagTestCommand extends Command {
  // Called every time the scheduler runs while the command is scheduled.
  @Override
  public void execute() {
+    AprilTagAlign target = aprilTag.targetValues();
+    //Shuffleboard.getTab("testWindow").add("distance", target.getDistance());
+    System.out.println(target.getDistance());
+    System.out.println(target.getId());
+    
+    SmartDashboard.putNumber("Distance", target.getDistance());
+    
     if(target.getId() != Double.MAX_VALUE){
             if(Math.abs(target.getYaw()) > yawMarginError){
                 System.out.println(Math.signum(target.getYaw()) * -1);
@@ -67,7 +77,7 @@ public class AprilTagTestCommand extends Command {
  // Returns true when the command should end.
  @Override
  public boolean isFinished() {
-   return isFinished;
+   return true;
  }
 
 }

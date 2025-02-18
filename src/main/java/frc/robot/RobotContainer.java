@@ -7,12 +7,13 @@ package frc.robot;
 import frc.robot.Constants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.PullCoral;
-import frc.robot.commands.PushCoral;
-import frc.robot.subsystems.AprilTagSubsystem;
-import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.commands.AprilTag.AprilTagTestCommand;
+import frc.robot.commands.Coral.PullCoral;
+import frc.robot.commands.Coral.PushCoral;
 import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.NeoSubsystem;
+import frc.robot.subsystems.AprilTag.AprilTagSubsystem;
+import frc.robot.subsystems.Coral.NeoSubsystem;
+import frc.robot.subsystems.Drive.DriveSubsystem;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.XboxController;
@@ -47,7 +48,7 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public DriveSubsystem m_robotDrive = new DriveSubsystem(); 
   private AprilTagSubsystem m_aprilTag = new AprilTagSubsystem();
-  private final NeoSubsystem coralpushpullsubsystem = new NeoSubsystem();
+  // private final NeoSubsystem coralpushpullsubsystem = new NeoSubsystem();
 
   // The driver's controller(s)
   XboxController m_driverController = new XboxController(0);
@@ -61,7 +62,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
-
+     
      // Configure default commands
      m_robotDrive.setDefaultCommand(
         // The left stick controls translation of the robot.
@@ -71,10 +72,9 @@ public class RobotContainer {
                 -MathUtil.applyDeadband(m_driverController.getLeftY(), kDriveDeadband),
                 -MathUtil.applyDeadband(m_driverController.getLeftX(), kDriveDeadband),
                 -MathUtil.applyDeadband(m_driverController.getRightX(), kDriveDeadband),
-                false),
+                true),
             m_robotDrive));
-    
-
+      
   }
             
 
@@ -95,9 +95,9 @@ public class RobotContainer {
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
     Constants.xboxController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
-    Constants.xboxController.x().whileTrue(new PullCoral(coralpushpullsubsystem));
-    Constants.xboxController.a().whileTrue(new PushCoral(coralpushpullsubsystem));
-    
+    // Constants.xboxController.x().whileTrue(new PullCoral(coralpushpullsubsystem));
+    // Constants.xboxController.a().whileTrue(new PushCoral(coralpushpullsubsystem));
+    Constants.xboxController.a().onTrue(new AprilTagTestCommand(m_aprilTag));
   }
 
   /**
