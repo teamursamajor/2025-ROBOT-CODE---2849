@@ -14,14 +14,13 @@ import frc.robot.commands.ElevatorDown;
 //import frc.robot.commands.ElevatorSetHeight;
 import frc.robot.commands.ElevatorUp;
 import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.PullCoral;
-import frc.robot.commands.PushCoral;
-import frc.robot.subsystems.AprilTagSubsystem;
-import frc.robot.subsystems.ClimbSubsystem;
-import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.commands.AprilTag.AprilTagTestCommand;
+import frc.robot.commands.Coral.PullCoral;
+import frc.robot.commands.Coral.PushCoral;
 import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.NeoSubsystem;
+import frc.robot.subsystems.AprilTag.AprilTagSubsystem;
+import frc.robot.subsystems.Coral.NeoSubsystem;
+import frc.robot.subsystems.Drive.DriveSubsystem;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.XboxController;
@@ -54,12 +53,11 @@ public class RobotContainer {
   
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  // public DriveSubsystem m_robotDrive = new DriveSubsystem(); 
+  public DriveSubsystem m_robotDrive = new DriveSubsystem(); 
   //private AprilTagSubsystem m_aprilTag = new AprilTagSubsystem();
   private final ClimbSubsystem climbsubsys = new ClimbSubsystem();
-  //private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
-  
-  private final NeoSubsystem coralpushpullsubsystem = new NeoSubsystem();
+  //private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();  // private final NeoSubsystem coralpushpullsubsystem = new NeoSubsystem();
+
   
   // The driver's controller(s)
   XboxController m_driverController = new XboxController(0);
@@ -73,9 +71,9 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
-
+     
      // Configure default commands
-    /* m_robotDrive.setDefaultCommand(
+     m_robotDrive.setDefaultCommand(
         // The left stick controls translation of the robot.
         // Turning is controlled by the X axis of the right stick.
          new RunCommand(
@@ -83,10 +81,9 @@ public class RobotContainer {
                 -MathUtil.applyDeadband(m_driverController.getLeftY(), kDriveDeadband),
                 -MathUtil.applyDeadband(m_driverController.getLeftX(), kDriveDeadband),
                 -MathUtil.applyDeadband(m_driverController.getRightX(), kDriveDeadband),
-                false),
+                true),
             m_robotDrive));
-    */
-
+      
   }
             
 

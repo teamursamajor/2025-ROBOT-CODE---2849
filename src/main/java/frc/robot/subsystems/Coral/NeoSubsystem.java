@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.subsystems;
+package frc.robot.subsystems.Coral;
 
 import edu.wpi.first.hal.FRCNetComm.tInstances;
 import edu.wpi.first.hal.FRCNetComm.tResourceType;
@@ -33,7 +33,7 @@ public class NeoSubsystem extends SubsystemBase {
     SparkMax Motor2 = new SparkMax(7, MotorType.kBrushless);
     private SparkMaxConfig SparkMaxConfig = new SparkMaxConfig();
     
-private final double speed = 0.25;
+private final double speed = 0.1;
     public NeoSubsystem(){
         SparkMaxConfig.idleMode(IdleMode.kBrake);
         Motor1.configure(SparkMaxConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
