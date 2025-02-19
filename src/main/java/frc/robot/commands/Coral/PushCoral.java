@@ -1,13 +1,13 @@
 package frc.robot.commands.Coral;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.Coral.NeoSubsystem;
+import frc.robot.subsystems.Coral.Coral;
 
 public class PushCoral extends Command{
     
-    private NeoSubsystem pushcoral;
+    private Coral pushcoral;
       // Called when the command is initially scheduled.
-      public PushCoral(NeoSubsystem neoSubsystem){
+      public PushCoral(Coral neoSubsystem){
         pushcoral = neoSubsystem;
         addRequirements(neoSubsystem);
 

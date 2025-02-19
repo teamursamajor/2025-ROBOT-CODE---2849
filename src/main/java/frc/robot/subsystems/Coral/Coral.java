@@ -26,7 +26,7 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkBaseConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
-public class NeoSubsystem extends SubsystemBase {
+public class Coral extends SubsystemBase {
   
 
     SparkMax Motor1 = new SparkMax(3, MotorType.kBrushless);
@@ -34,7 +34,7 @@ public class NeoSubsystem extends SubsystemBase {
     private SparkMaxConfig SparkMaxConfig = new SparkMaxConfig();
     
 private final double speed = 0.1;
-    public NeoSubsystem(){
+    public Coral(){
         SparkMaxConfig.idleMode(IdleMode.kBrake);
         Motor1.configure(SparkMaxConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
         Motor2.configure(SparkMaxConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);

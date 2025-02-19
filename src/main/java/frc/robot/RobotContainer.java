@@ -12,7 +12,7 @@ import frc.robot.commands.Coral.PullCoral;
 import frc.robot.commands.Coral.PushCoral;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.AprilTag.AprilTagSubsystem;
-import frc.robot.subsystems.Coral.NeoSubsystem;
+import frc.robot.subsystems.Coral.Coral;
 import frc.robot.subsystems.Drive.DriveSubsystem;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.util.Units;
@@ -97,7 +97,7 @@ public class RobotContainer {
     Constants.xboxController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
     // Constants.xboxController.x().whileTrue(new PullCoral(coralpushpullsubsystem));
     // Constants.xboxController.a().whileTrue(new PushCoral(coralpushpullsubsystem));
-    Constants.xboxController.a().onTrue(new AprilTagTestCommand(m_aprilTag));
+    Constants.xboxController.a().onTrue(new AprilTagTestCommand(m_aprilTag, m_robotDrive));
   }
 
   /**
