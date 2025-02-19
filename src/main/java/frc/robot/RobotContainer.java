@@ -6,10 +6,18 @@ package frc.robot;
 
 import frc.robot.Constants;
 import frc.robot.commands.Autos;
+import frc.robot.commands.ClimbDownCommand;
+import frc.robot.commands.ClimbLockCommand;
+import frc.robot.commands.ClimbUnlockCommand;
+import frc.robot.commands.ClimbUpCommand;
+import frc.robot.commands.ElevatorDown;
+//import frc.robot.commands.ElevatorSetHeight;
+import frc.robot.commands.ElevatorUp;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.AprilTag.AprilTagTestCommand;
 import frc.robot.commands.Coral.PullCoral;
 import frc.robot.commands.Coral.PushCoral;
+import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.AprilTag.AprilTagSubsystem;
 import frc.robot.subsystems.Coral.Coral;
@@ -47,9 +55,11 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public DriveSubsystem m_robotDrive = new DriveSubsystem(); 
-  private AprilTagSubsystem m_aprilTag = new AprilTagSubsystem();
-  // private final NeoSubsystem coralpushpullsubsystem = new NeoSubsystem();
+  //private AprilTagSubsystem m_aprilTag = new AprilTagSubsystem();
+  private final ClimbSubsystem climbsubsys = new ClimbSubsystem();
+  //private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();  // private final NeoSubsystem coralpushpullsubsystem = new NeoSubsystem();
 
+  
   // The driver's controller(s)
   XboxController m_driverController = new XboxController(0);
 
@@ -94,11 +104,19 @@ public class RobotContainer {
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
-    Constants.xboxController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
-    // Constants.xboxController.x().whileTrue(new PullCoral(coralpushpullsubsystem));
-    // Constants.xboxController.a().whileTrue(new PushCoral(coralpushpullsubsystem));
-    Constants.xboxController.a().onTrue(new AprilTagTestCommand(m_aprilTag, m_robotDrive));
+    //Constants.xboxController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+   // Constants.xboxController.a().whileTrue(new ClimbDownCommand(climbsubsys));
+    Constants.xboxController.y().onTrue(new ClimbUpCommand(climbsubsys));
+    Constants.xboxController.a().whileTrue(new ClimbDownCommand(climbsubsys));
+    //Constants.xboxController.x().toggleOnTrue(new ClimbLockCommand(climbsubsys));
+    //Constants.xboxController.x().onTrue(new ClimbLockCommand(climbsubsys));
+    //Constants.xboxController.a().onTrue(new ClimbUnlockCommand(climbsubsys));
+    //Constants.xboxController.a().onTrue(new ElevatorUp(elevatorSubsystem));
+    //Constants.xboxController.y().onTrue(new ElevatorDown(elevatorSubsystem));
+    //Constants.xboxController.x().onTrue(new ClimbUnlockCommand(climbsubsys));
+    //Constants.xboxController.b().onTrue(new ClimbLockCommand(climbsubsys));
   }
+
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
