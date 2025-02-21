@@ -1,11 +1,11 @@
-package frc.robot.commands;
+package frc.robot.commands.Climb;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.ClimbSubsystem;
+import frc.robot.subsystems.Climb.ClimbSubsystem;
 
 public class ClimbUnlockCommand extends Command {
     private ClimbSubsystem climbsubsystem;
-
+    private boolean isFinished = false;
     public ClimbUnlockCommand(ClimbSubsystem climbSubsystem){
         this.climbsubsystem = climbSubsystem;
     }
@@ -18,16 +18,19 @@ public class ClimbUnlockCommand extends Command {
   @Override
   public void execute() {
     climbsubsystem.unlockServo();
+    isFinished = true;
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    System.out.println("Climb Unlocked");
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return isFinished;
   }
 
 }

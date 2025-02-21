@@ -1,9 +1,9 @@
-package frc.robot.commands;
+package frc.robot.commands.Elevator;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ElevatorSubsystem;
 
-public class ElevatorUp extends Command{
+public class ElevatorDown extends Command{
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final ElevatorSubsystem elevator_subsystem;
 
@@ -13,7 +13,7 @@ public class ElevatorUp extends Command{
 
 
 
-  public ElevatorUp(ElevatorSubsystem subsystem) {
+  public ElevatorDown(ElevatorSubsystem subsystem) {
     elevator_subsystem = subsystem;
     addRequirements(subsystem);
   }
@@ -41,7 +41,7 @@ public class ElevatorUp extends Command{
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    elevator_subsystem.ElevatorSetHeight(1);
+    elevator_subsystem.ElevatorSetHeight(-1);
     return false;
   }
 }

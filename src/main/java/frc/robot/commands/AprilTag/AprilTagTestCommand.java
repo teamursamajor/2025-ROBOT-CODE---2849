@@ -14,16 +14,19 @@ public class AprilTagTestCommand extends Command {
     DriveSubsystem m_drive;
     
     
-    private double desiredDistance = 10;
+    private double desiredDistance;
     private double desiredDistanceMargin = 1;
     private double yawMarginError = 0.5;
     private boolean isFinished = false;
     
-    public AprilTagTestCommand (AprilTagSubsystem aprilSubsystem, DriveSubsystem driveSubsystem){
+    public AprilTagTestCommand (AprilTagSubsystem aprilSubsystem, DriveSubsystem driveSubsystem, double desiredDistance){
         aprilTag = aprilSubsystem;
         m_drive = driveSubsystem;
+        this.desiredDistance = desiredDistance;
         addRequirements(aprilSubsystem,driveSubsystem);
     }
+
+    
 
 
     

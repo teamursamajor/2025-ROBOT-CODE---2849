@@ -6,20 +6,19 @@ package frc.robot;
 
 import frc.robot.Constants;
 import frc.robot.commands.Autos;
-import frc.robot.commands.ClimbDownCommand;
-import frc.robot.commands.ClimbLockCommand;
-import frc.robot.commands.ClimbUnlockCommand;
-import frc.robot.commands.ClimbUpCommand;
-import frc.robot.commands.ElevatorDown;
-//import frc.robot.commands.ElevatorSetHeight;
-import frc.robot.commands.ElevatorUp;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.AprilTag.AprilTagTestCommand;
+import frc.robot.commands.Climb.ClimbDownCommand;
+import frc.robot.commands.Climb.ClimbLockCommand;
+import frc.robot.commands.Climb.ClimbUnlockCommand;
+import frc.robot.commands.Climb.ClimbUpCommand;
 import frc.robot.commands.Coral.PullCoral;
 import frc.robot.commands.Coral.PushCoral;
-import frc.robot.subsystems.ClimbSubsystem;
+import frc.robot.commands.Elevator.ElevatorDown;
+import frc.robot.commands.Elevator.ElevatorUp;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.AprilTag.AprilTagSubsystem;
+import frc.robot.subsystems.Climb.ClimbSubsystem;
 import frc.robot.subsystems.Coral.Coral;
 import frc.robot.subsystems.Drive.DriveSubsystem;
 import edu.wpi.first.math.MathUtil;
@@ -54,7 +53,7 @@ public class RobotContainer {
   
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  public DriveSubsystem m_robotDrive = new DriveSubsystem(); 
+  //public DriveSubsystem m_robotDrive = new DriveSubsystem(); 
   //private AprilTagSubsystem m_aprilTag = new AprilTagSubsystem();
   private final ClimbSubsystem climbsubsys = new ClimbSubsystem();
   //private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();  // private final NeoSubsystem coralpushpullsubsystem = new NeoSubsystem();
@@ -74,7 +73,7 @@ public class RobotContainer {
     configureBindings();
      
      // Configure default commands
-     m_robotDrive.setDefaultCommand(
+     /*m_robotDrive.setDefaultCommand(
         // The left stick controls translation of the robot.
         // Turning is controlled by the X axis of the right stick.
          new RunCommand(
@@ -84,7 +83,7 @@ public class RobotContainer {
                 -MathUtil.applyDeadband(m_driverController.getRightX(), kDriveDeadband),
                 true),
             m_robotDrive));
-      
+      */
   }
             
 
@@ -106,11 +105,11 @@ public class RobotContainer {
     // cancelling on release.
     //Constants.xboxController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
    // Constants.xboxController.a().whileTrue(new ClimbDownCommand(climbsubsys));
-    Constants.xboxController.y().onTrue(new ClimbUpCommand(climbsubsys));
-    Constants.xboxController.a().whileTrue(new ClimbDownCommand(climbsubsys));
+    //Constants.xboxController.y().whileTrue(new ClimbUpCommand(climbsubsys));
+    //Constants.xboxController.a().whileTrue(new ClimbDownCommand(climbsubsys));
     //Constants.xboxController.x().toggleOnTrue(new ClimbLockCommand(climbsubsys));
-    //Constants.xboxController.x().onTrue(new ClimbLockCommand(climbsubsys));
-    //Constants.xboxController.a().onTrue(new ClimbUnlockCommand(climbsubsys));
+    Constants.xboxController.x().onTrue(new ClimbLockCommand(climbsubsys));
+    Constants.xboxController.a().onTrue(new ClimbUnlockCommand(climbsubsys));
     //Constants.xboxController.a().onTrue(new ElevatorUp(elevatorSubsystem));
     //Constants.xboxController.y().onTrue(new ElevatorDown(elevatorSubsystem));
     //Constants.xboxController.x().onTrue(new ClimbUnlockCommand(climbsubsys));
