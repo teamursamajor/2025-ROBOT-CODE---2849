@@ -17,6 +17,7 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.AprilTag.AprilTagTestCommand;
 import frc.robot.commands.Coral.PullCoral;
 import frc.robot.commands.Coral.PushCoral;
+import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.AprilTag.AprilTagSubsystem;
 import frc.robot.subsystems.Coral.NeoSubsystem;
@@ -53,7 +54,7 @@ public class RobotContainer {
   
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  public DriveSubsystem m_robotDrive = new DriveSubsystem(); 
+  //public DriveSubsystem m_robotDrive = new DriveSubsystem(); 
   //private AprilTagSubsystem m_aprilTag = new AprilTagSubsystem();
   private final ClimbSubsystem climbsubsys = new ClimbSubsystem();
   //private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();  // private final NeoSubsystem coralpushpullsubsystem = new NeoSubsystem();
@@ -71,11 +72,12 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
-     
+     /* 
      // Configure default commands
      m_robotDrive.setDefaultCommand(
         // The left stick controls translation of the robot.
         // Turning is controlled by the X axis of the right stick.
+         
          new RunCommand(
             () -> m_robotDrive.drive(
                 -MathUtil.applyDeadband(m_driverController.getLeftY(), kDriveDeadband),
@@ -83,7 +85,7 @@ public class RobotContainer {
                 -MathUtil.applyDeadband(m_driverController.getRightX(), kDriveDeadband),
                 true),
             m_robotDrive));
-      
+      */
   }
             
 
@@ -105,15 +107,12 @@ public class RobotContainer {
     // cancelling on release.
     //Constants.xboxController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
    // Constants.xboxController.a().whileTrue(new ClimbDownCommand(climbsubsys));
-    Constants.xboxController.y().onTrue(new ClimbUpCommand(climbsubsys));
+    Constants.xboxController.y().whileTrue(new ClimbUpCommand(climbsubsys));
     Constants.xboxController.a().whileTrue(new ClimbDownCommand(climbsubsys));
-    //Constants.xboxController.x().toggleOnTrue(new ClimbLockCommand(climbsubsys));
-    //Constants.xboxController.x().onTrue(new ClimbLockCommand(climbsubsys));
-    //Constants.xboxController.a().onTrue(new ClimbUnlockCommand(climbsubsys));
     //Constants.xboxController.a().onTrue(new ElevatorUp(elevatorSubsystem));
     //Constants.xboxController.y().onTrue(new ElevatorDown(elevatorSubsystem));
-    //Constants.xboxController.x().onTrue(new ClimbUnlockCommand(climbsubsys));
-    //Constants.xboxController.b().onTrue(new ClimbLockCommand(climbsubsys));
+    Constants.xboxController.x().onTrue(new ClimbUnlockCommand(climbsubsys)).onTrue(new ClimbUpCommand(climbsubsys));
+    Constants.xboxController.b().onTrue(new ClimbLockCommand(climbsubsys));
   }
 
 

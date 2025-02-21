@@ -24,7 +24,7 @@ public class ClimbDownCommand extends Command{
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() { 
-    climb_subsystem.unlockServo();
+    //climb_subsystem.unlockServo();
     if(climb_subsystem.getPosition() == 0.5){
       Timer.delay(0.25);
       climb_subsystem.climbDown();

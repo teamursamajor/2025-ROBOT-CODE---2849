@@ -65,19 +65,20 @@ public class ElevatorSubsystem extends SubsystemBase{
         if(heightLevel > 4){
         heightLevel = 4;
         }
+
         if(heightLevel==0){
             desiredHeight = 0; //0 inches
         }
-        if(heightLevel==1){
+        else if(heightLevel==1){
             desiredHeight = 18; //1 foot 6 inches
         }
-        if(heightLevel==2){
+        else if(heightLevel==2){
             desiredHeight = 24.875f; //2 foot 7/8 inches
         }
-        if(heightLevel==3){
+        else if(heightLevel==3){
             desiredHeight = 47.625f; //3 foot 11+5/8 inches
         }
-        if(heightLevel==4){
+        else if(heightLevel==4){
             desiredHeight = 72; //6 foot
         }
         desiredTurns = desiredHeight/heightToTurnRatio;
