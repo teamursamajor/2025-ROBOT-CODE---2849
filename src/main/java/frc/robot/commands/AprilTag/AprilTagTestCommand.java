@@ -3,24 +3,30 @@ package frc.robot.commands.AprilTag;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.AprilTag.AprilTagAlign;
 import frc.robot.subsystems.AprilTag.AprilTagSubsystem;
+import frc.robot.subsystems.Drive.DriveSubsystem;
 import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class AprilTagTestCommand extends Command {
 
-    AprilTagSubsystem aprilTag = new AprilTagSubsystem();
+    AprilTagSubsystem aprilTag;
+    DriveSubsystem m_drive;
     
     
-    private double desiredDistance = 10;
+    private double desiredDistance;
     private double desiredDistanceMargin = 1;
     private double yawMarginError = 0.5;
     private boolean isFinished = false;
     
-    public AprilTagTestCommand (AprilTagSubsystem aprilSubsystem){
+    public AprilTagTestCommand (AprilTagSubsystem aprilSubsystem, DriveSubsystem driveSubsystem, double desiredDistance){
         aprilTag = aprilSubsystem;
-        addRequirements(aprilSubsystem);
+        m_drive = driveSubsystem;
+        this.desiredDistance = desiredDistance;
+        addRequirements(aprilSubsystem,driveSubsystem);
     }
+
+    
 
 
     
@@ -46,9 +52,12 @@ public class AprilTagTestCommand extends Command {
     if(target.getId() != Double.MAX_VALUE){
             if(Math.abs(target.getYaw()) > yawMarginError){
                 System.out.println(Math.signum(target.getYaw()) * -1);
+                double rot = Math.signum(target.getYaw()) * -1;
+                rot *= 0.5;
+                m_drive.drive(0.0, 0.0, rot, false);
             }
             else{
-                System.out.println(0);
+                System.out.println("Yaw Alligned");
             }
 
     }
@@ -56,9 +65,11 @@ public class AprilTagTestCommand extends Command {
         if(target.getId() != Double.MAX_VALUE){
             if(Math.abs(target.getDistance() - desiredDistance) > desiredDistanceMargin){
                 System.out.println(Math.signum(target.getDistance() - desiredDistance));
+                double direction = Math.signum(target.getDistance() - desiredDistance) * 0.5;
+                m_drive.drive(direction, 0.0, 0.0, false);
             }
             else{
-                System.out.println(0);
+                System.out.println("Distance Aligned");
                 isFinished = true;
             }
             

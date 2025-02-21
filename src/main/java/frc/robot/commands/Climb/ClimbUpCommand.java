@@ -1,15 +1,17 @@
-package frc.robot.commands;
+package frc.robot.commands.Climb;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.ClimbSubsystem;
+import frc.robot.subsystems.Climb.ClimbSubsystem;
 
-public class ClimbDownCommand extends Command{
+public class ClimbUpCommand extends Command{
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final ClimbSubsystem climb_subsystem;
 
   
-  public ClimbDownCommand(ClimbSubsystem subsystem) {
+  public ClimbUpCommand(ClimbSubsystem subsystem) {
     climb_subsystem = subsystem;
     addRequirements(subsystem);
   }
@@ -24,10 +26,11 @@ public class ClimbDownCommand extends Command{
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() { 
-    //climb_subsystem.unlockServo();
+    climb_subsystem.unlockServo();
     if(climb_subsystem.getPosition() == 0.5){
+      System.out.println(climb_subsystem.getPosition());
       Timer.delay(0.25);
-      climb_subsystem.climbDown();
+      climb_subsystem.climbUp();
     }
   }
 

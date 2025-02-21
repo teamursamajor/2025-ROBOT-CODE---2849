@@ -1,13 +1,13 @@
 package frc.robot.commands.Coral;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.Coral.NeoSubsystem;
+import frc.robot.subsystems.Coral.Coral;
 
 public class PullCoral extends Command{
     
-  private final NeoSubsystem pullcoral;
+  private final Coral pullcoral;
 
-    public PullCoral(NeoSubsystem neoSubsystem){
+    public PullCoral(Coral neoSubsystem){
         pullcoral = neoSubsystem;
         addRequirements(neoSubsystem);
 
