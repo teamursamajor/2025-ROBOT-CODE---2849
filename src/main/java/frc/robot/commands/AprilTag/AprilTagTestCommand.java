@@ -33,44 +33,41 @@ public class AprilTagTestCommand extends Command {
 
     }
 
-    // Called every time the scheduler runs while the command is scheduled.
-    @Override
-    public void execute() {
-        AprilTagAlign target = aprilTag.targetValues();
-        // Shuffleboard.getTab("testWindow").add("distance", target.getDistance());
-        System.out.println(target.getDistance());
-        System.out.println(target.getId());
-
-        SmartDashboard.putNumber("Distance", target.getDistance());
-        if (target.getId() != Double.MAX_VALUE) {
-            if (Math.abs(target.getY()) > yMarginError) {
-                System.out.println(Math.signum(target.getY()) * -1);
-                double y = Math.signum(target.getY()) * -1;
-                y *= .5;
-                m_drive.drive(0, y, 0, false);
+ // Called every time the scheduler runs while the command is scheduled.
+ @Override
+ public void execute() {
+    AprilTagAlign target = aprilTag.targetValues();
+    //Shuffleboard.getTab("testWindow").add("distance", target.getDistance());
+    System.out.println(target.getDistanceX());
+    System.out.println(target.getId());
+    
+    SmartDashboard.putNumber("Distance", target.getDistanceX());
+    
+    if(target.getId() != Double.MAX_VALUE){
+            if(Math.abs(target.getYaw()) > yawMarginError){
+                System.out.println(Math.signum(target.getYaw()) * -1);
+                double rot = Math.signum(target.getYaw()) * -1;
+                rot *= 0.5;
+                m_drive.drive(0.0, 0.0, rot, false);
             }
-        }
-        if (Math.abs(target.getYaw()) > yawMarginError) {
-            System.out.println(Math.signum(target.getYaw()) * -1);
-            double rot = Math.signum(target.getYaw()) * -1;
-            rot *= 0.5;
-            m_drive.drive(0.0, 0.0, rot, false);
-        } else {
-            System.out.println("Yaw Alligned");
-        }
-
-        if (Math.abs(target.getYaw()) < yawMarginError) {
-            if (target.getId() != Double.MAX_VALUE) {
-                if (Math.abs(target.getDistance() - desiredDistance) > desiredDistanceMargin) {
-                    System.out.println(Math.signum(target.getDistance() - desiredDistance));
-                    double direction = Math.signum(target.getDistance() - desiredDistance) * 0.5;
-                    m_drive.drive(direction, 0.0, 0.0, false);
-                } else {
-                    System.out.println("Distance Aligned");
-                    isFinished = true;
-                }
-
+            else{
+                System.out.println("Yaw Alligned");
             }
+
+    }
+    if(Math.abs(target.getYaw()) < yawMarginError){
+        if(target.getId() != Double.MAX_VALUE){
+            if(Math.abs(target.getDistanceX() - desiredDistance) > desiredDistanceMargin){
+                System.out.println(Math.signum(target.getDistanceX() - desiredDistance));
+                double direction = Math.signum(target.getDistanceX() - desiredDistance) * 0.5;
+                m_drive.drive(direction, 0.0, 0.0, false);
+            }
+            else{
+                System.out.println("Distance Aligned");
+                isFinished = true;
+            }
+            
+
         }
 
     }

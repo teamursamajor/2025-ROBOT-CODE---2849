@@ -37,8 +37,8 @@ public class AprilTagSubsystem extends SubsystemBase {
         double yaw = Double.MAX_VALUE;
         double pitch = Double.MAX_VALUE;
         double id = Double.MAX_VALUE;
-        double distance = Double.MAX_VALUE;
-        double y = Double.MAX_VALUE;
+        double distanceX = Double.MAX_VALUE;
+        double distanceY = Double.MAX_VALUE;
         
         if (!results.isEmpty()) {
             // Camera processed a new frame since last
@@ -51,9 +51,9 @@ public class AprilTagSubsystem extends SubsystemBase {
                 yaw = target.getYaw();
                 pitch = target.getPitch();
                 id = target.getFiducialId();
-                distance = bestCameraToTarget.getX();
-                y = bestCameraToTarget.getY();
-                SmartDashboard.putNumber("Distance", distance);
+                distanceX = bestCameraToTarget.getX();
+                SmartDashboard.putNumber("DistanceX", distanceX);
+                SmartDashboard.putNumber("DistanceX", distanceY);
                 SmartDashboard.putNumber("Yaw", yaw);
                 
             }
@@ -63,6 +63,6 @@ public class AprilTagSubsystem extends SubsystemBase {
 
 
         }
-        return new AprilTagAlign(yaw,pitch,distance,id,y);
+        return new AprilTagAlign(yaw,pitch,distanceX, distanceY,id);
     }
 }
