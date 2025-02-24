@@ -12,13 +12,15 @@ import frc.robot.commands.Climb.ClimbDownCommand;
 import frc.robot.commands.Climb.ClimbLockCommand;
 import frc.robot.commands.Climb.ClimbUnlockCommand;
 import frc.robot.commands.Climb.ClimbUpCommand;
+import frc.robot.commands.Coral.DeceraseAngle;
+import frc.robot.commands.Coral.IncreaseAngle;
 import frc.robot.commands.Coral.PullCoral;
 import frc.robot.commands.Coral.PushCoral;
 //import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.AprilTag.AprilTagSubsystem;
 import frc.robot.subsystems.Climb.ClimbSubsystem;
-import frc.robot.subsystems.Coral.Coral;
+import frc.robot.subsystems.Coral.CoralSubsystem;
 import frc.robot.subsystems.Drive.DriveSubsystem;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.util.Units;
@@ -53,10 +55,10 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   //public DriveSubsystem m_robotDrive = new DriveSubsystem(); 
-  //public DriveSubsystem m_robotDrive = new DriveSubsystem(); 
   //private AprilTagSubsystem m_aprilTag = new AprilTagSubsystem();
   private final ClimbSubsystem climbsubsys = new ClimbSubsystem();
-  //private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();  // private final NeoSubsystem coralpushpullsubsystem = new NeoSubsystem();
+  //private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();  
+  private final CoralSubsystem coralSubsystem = new CoralSubsystem();
 
   
   // The driver's controller(s)
@@ -106,13 +108,22 @@ public class RobotContainer {
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
     //Constants.xboxController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
-   // Constants.xboxController.a().whileTrue(new ClimbDownCommand(climbsubsys));
+    
+    // Climb
     Constants.xboxController.y().whileTrue(new ClimbUpCommand(climbsubsys));
     Constants.xboxController.a().whileTrue(new ClimbDownCommand(climbsubsys));
-    //Constants.xboxController.a().onTrue(new ElevatorUp(elevatorSubsystem));
-    //Constants.xboxController.y().onTrue(new ElevatorDown(elevatorSubsystem));
     Constants.xboxController.x().onTrue(new ClimbUnlockCommand(climbsubsys)).onTrue(new ClimbUpCommand(climbsubsys));
     Constants.xboxController.b().onTrue(new ClimbLockCommand(climbsubsys));
+
+    // Elevator
+    //Constants.xboxController.a().onTrue(new ElevatorUp(elevatorSubsystem));
+    //Constants.xboxController.y().onTrue(new ElevatorDown(elevatorSubsystem));
+    
+
+    // Coral Commands
+    // Constants.xboxController.povUp().whileTrue(new IncreaseAngle(coralSubsystem));
+    // Constants.xboxController.povDown().whileTrue(new DeceraseAngle(coralSubsystem));
+    
   }
 
 

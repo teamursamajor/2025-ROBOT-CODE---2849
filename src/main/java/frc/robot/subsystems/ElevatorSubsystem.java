@@ -44,8 +44,8 @@ public class ElevatorSubsystem extends SubsystemBase{
     
     public RelativeEncoder m_encoder1;
     public RelativeEncoder m_encoder2;
-    public float motorSpeed = 0.5f;
-    public float turnTolerence = 0.2f;
+    public double motorSpeed = 0.5;
+    public double turnTolerence = 0.2;
     public int heightLevel;
     public double desiredHeight; //inches
     public static float heightToTurnRatio = 1; //inches to rotations
@@ -73,10 +73,10 @@ public class ElevatorSubsystem extends SubsystemBase{
             desiredHeight = 18; //1 foot 6 inches
         }
         else if(heightLevel==2){
-            desiredHeight = 24.875f; //2 foot 7/8 inches
+            desiredHeight = 24.875; //2 foot 7/8 inches
         }
         else if(heightLevel==3){
-            desiredHeight = 47.625f; //3 foot 11+5/8 inches
+            desiredHeight = 47.625; //3 foot 11+5/8 inches
         }
         else if(heightLevel==4){
             desiredHeight = 72; //6 foot

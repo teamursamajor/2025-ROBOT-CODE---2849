@@ -16,7 +16,6 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.ADIS16470_IMU.IMUAxis;
-//import frc.robot.Constants.DriveConstants;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.spark.SparkMax;
@@ -25,16 +24,21 @@ import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkBaseConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 
-public class Coral extends SubsystemBase {
+public class CoralSubsystem extends SubsystemBase {
   
 
     SparkMax Motor1 = new SparkMax(3, MotorType.kBrushless);
     SparkMax Motor2 = new SparkMax(7, MotorType.kBrushless);
+    Spark Motor3 = new Spark(3);
+
+    
     private SparkMaxConfig SparkMaxConfig = new SparkMaxConfig();
     
 private final double speed = 0.1;
-    public Coral(){
+private final double angleSpeed = 0.25;
+    public CoralSubsystem(){
         SparkMaxConfig.idleMode(IdleMode.kBrake);
         Motor1.configure(SparkMaxConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
         Motor2.configure(SparkMaxConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
@@ -54,6 +58,12 @@ private final double speed = 0.1;
     public void stopMotor(){
         Motor1.set(0);
         Motor2.set(0);
+        Motor3.set(0);
     }
-
+    public void increaseAngle(){
+        Motor3.set(angleSpeed);
+    }
+    public void decreaseAngle(){
+        Motor3.set(angleSpeed);
+    }
   }

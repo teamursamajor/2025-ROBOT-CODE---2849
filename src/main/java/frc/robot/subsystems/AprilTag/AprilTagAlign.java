@@ -19,13 +19,15 @@ public class AprilTagAlign {
     double pitch;
     double distance;
     double id;
+    double y;
 
 
-    public AprilTagAlign(double yaw, double pitch, double distance, double id){
+    public AprilTagAlign(double yaw, double pitch, double distance, double id, double y){
         this.yaw = yaw;
         this.pitch = pitch;
         this.distance = distance;
         this.id = id;
+        this.y = y;
     }
     
     public double getYaw(){
@@ -42,5 +44,9 @@ public class AprilTagAlign {
 
     public double getId(){
         return id;
+    }
+
+    public double getY(){
+        return y;
     }
 }
