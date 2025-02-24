@@ -40,20 +40,21 @@ import com.revrobotics.spark.SparkAbsoluteEncoder;
 
 public class ElevatorSubsystem extends SubsystemBase{
     SparkMax motor1 = new SparkMax(0,MotorType.kBrushless);
-    SparkMax motor2 = new SparkMax(0,MotorType.kBrushless);
+    
     
     public RelativeEncoder m_encoder1;
-    public RelativeEncoder m_encoder2;
+    
     public float motorSpeed = 0.5f;
     public float turnTolerence = 0.2f;
     public int heightLevel;
     public double desiredHeight; //inches
     public static float heightToTurnRatio = 1; //inches to rotations
     public double desiredTurns;
+    public double elevatorBaseHeight; //inches, height that elevator is at lowest
     
     public ElevatorSubsystem(){
         m_encoder1 = motor1.getEncoder();
-        m_encoder2 = motor2.getEncoder();
+        
         
     }
 
@@ -70,33 +71,30 @@ public class ElevatorSubsystem extends SubsystemBase{
             desiredHeight = 0; //0 inches
         }
         else if(heightLevel==1){
-            desiredHeight = 18; //1 foot 6 inches
+            desiredHeight = 18-elevatorBaseHeight; //1 foot 6 inches
         }
         else if(heightLevel==2){
-            desiredHeight = 24.875f; //2 foot 7/8 inches
+            desiredHeight = 24.875f-elevatorBaseHeight; //2 foot 7/8 inches
         }
         else if(heightLevel==3){
-            desiredHeight = 47.625f; //3 foot 11+5/8 inches
+            desiredHeight = 47.625f-elevatorBaseHeight; //3 foot 11+5/8 inches
         }
         else if(heightLevel==4){
-            desiredHeight = 72; //6 foot
+            desiredHeight = 72-elevatorBaseHeight; //6 foot
         }
         desiredTurns = desiredHeight/heightToTurnRatio;
 
-        double desiredTurns1;
-        double currentTurns1;
-        double desiredTurns2;
-        double currentTurns2;
-        desiredTurns1 = desiredTurns/2; //each motor moves half the total turns
-        desiredTurns2 = desiredTurns/2;
-        currentTurns1 = m_encoder1.getPosition();
-        currentTurns2 = m_encoder2.getPosition();
-        if(Math.abs(currentTurns1-desiredTurns1) > turnTolerence){
-        motor1.set(Math.signum(currentTurns1-desiredTurns1) * motorSpeed);
+        
+        double currentTurns;
+
+        //desiredTurns = desiredTurns/2; //each motor moves half the total turns
+        
+        currentTurns = m_encoder1.getPosition();
+        
+        if(Math.abs(currentTurns-desiredTurns) > turnTolerence){
+        motor1.set(Math.signum(currentTurns-desiredTurns) * motorSpeed);
         }
-        if(Math.abs(currentTurns2-desiredTurns2) > turnTolerence){
-        motor2.set(Math.signum(currentTurns2-desiredTurns2) * motorSpeed);
-        }
+
 
 
     }

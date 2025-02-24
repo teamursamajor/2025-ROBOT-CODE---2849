@@ -44,10 +44,10 @@ public class AprilTagTestCommand extends Command {
  public void execute() {
     AprilTagAlign target = aprilTag.targetValues();
     //Shuffleboard.getTab("testWindow").add("distance", target.getDistance());
-    System.out.println(target.getDistance());
+    System.out.println(target.getDistanceX());
     System.out.println(target.getId());
     
-    SmartDashboard.putNumber("Distance", target.getDistance());
+    SmartDashboard.putNumber("Distance", target.getDistanceX());
     
     if(target.getId() != Double.MAX_VALUE){
             if(Math.abs(target.getYaw()) > yawMarginError){
@@ -63,9 +63,9 @@ public class AprilTagTestCommand extends Command {
     }
     if(Math.abs(target.getYaw()) < yawMarginError){
         if(target.getId() != Double.MAX_VALUE){
-            if(Math.abs(target.getDistance() - desiredDistance) > desiredDistanceMargin){
-                System.out.println(Math.signum(target.getDistance() - desiredDistance));
-                double direction = Math.signum(target.getDistance() - desiredDistance) * 0.5;
+            if(Math.abs(target.getDistanceX() - desiredDistance) > desiredDistanceMargin){
+                System.out.println(Math.signum(target.getDistanceX() - desiredDistance));
+                double direction = Math.signum(target.getDistanceX() - desiredDistance) * 0.5;
                 m_drive.drive(direction, 0.0, 0.0, false);
             }
             else{
