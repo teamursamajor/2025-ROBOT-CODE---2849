@@ -26,8 +26,8 @@ public class ClimbSubsystem extends SubsystemBase{
     
 
 
-    private Spark motor = new Spark(1);
-    private Servo servo = new Servo(0);
+    private Spark motor = new Spark(4);
+    private Servo servo = new Servo(9);
 
 
     public ClimbSubsystem(){

@@ -3,7 +3,7 @@ package frc.robot.commands.Elevator;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ElevatorSubsystem;
 
-public class ElevatorUp extends Command{
+public class ElevatorSetHeight extends Command{
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final ElevatorSubsystem elevator_subsystem;
 
@@ -13,7 +13,7 @@ public class ElevatorUp extends Command{
 
 
 
-  public ElevatorUp(ElevatorSubsystem subsystem) {
+  public ElevatorSetHeight(ElevatorSubsystem subsystem, int heightLevel) {
     elevator_subsystem = subsystem;
     addRequirements(subsystem);
   }
@@ -41,7 +41,7 @@ public class ElevatorUp extends Command{
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    elevator_subsystem.ElevatorSetHeight(1);
+    elevator_subsystem.ElevatorSetHeight(heightLevel);
     return false;
   }
 }
