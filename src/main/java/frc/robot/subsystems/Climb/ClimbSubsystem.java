@@ -31,7 +31,6 @@ public class ClimbSubsystem extends SubsystemBase{
     private Servo servo = new Servo(9);
 
 
-
     public ClimbSubsystem(){
         servo.setBoundsMicroseconds(2000, 1800, 1500, 1200, 1000);
         

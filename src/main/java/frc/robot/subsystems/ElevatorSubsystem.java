@@ -58,8 +58,8 @@ public class ElevatorSubsystem extends SubsystemBase{
         
     }
 
-    public void ElevatorSetHeight(int incrementHeightLevel){
-        heightLevel += incrementHeightLevel;
+    public void ElevatorSetHeight(int heightLevel){
+        
         if(heightLevel < 0){
         heightLevel = 0;
         }
