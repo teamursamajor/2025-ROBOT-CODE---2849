@@ -12,32 +12,26 @@ public class AprilTagTestCommand extends Command {
 
     AprilTagSubsystem aprilTag;
     DriveSubsystem m_drive;
-    
-    
+
     private double desiredDistance;
     private double desiredDistanceMargin = 1;
     private double yawMarginError = 0.5;
+    private double yMarginError = 0.5;
     private boolean isFinished = false;
-    
-    public AprilTagTestCommand (AprilTagSubsystem aprilSubsystem, DriveSubsystem driveSubsystem, double desiredDistance){
+
+    public AprilTagTestCommand(AprilTagSubsystem aprilSubsystem, DriveSubsystem driveSubsystem,
+            double desiredDistance) {
         aprilTag = aprilSubsystem;
         m_drive = driveSubsystem;
         this.desiredDistance = desiredDistance;
-        addRequirements(aprilSubsystem,driveSubsystem);
+        addRequirements(aprilSubsystem, driveSubsystem);
     }
 
-    
+    // Called when the command is initially scheduled.
+    @Override
+    public void initialize() {
 
-
-    
-    
-
-
- // Called when the command is initially scheduled.
- @Override
- public void initialize() {
-    
- }
+    }
 
  // Called every time the scheduler runs while the command is scheduled.
  @Override
@@ -75,20 +69,19 @@ public class AprilTagTestCommand extends Command {
             
 
         }
+
     }
 
- }
+    // Called once the command ends or is interrupted.
+    @Override
+    public void end(boolean interrupted) {
+        System.out.println("completed");
+    }
 
- // Called once the command ends or is interrupted.
- @Override
- public void end(boolean interrupted) {
-    System.out.println("completed");
- }
-
- // Returns true when the command should end.
- @Override
- public boolean isFinished() {
-   return true;
- }
+    // Returns true when the command should end.
+    @Override
+    public boolean isFinished() {
+        return true;
+    }
 
 }
