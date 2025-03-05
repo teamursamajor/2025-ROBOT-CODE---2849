@@ -25,8 +25,9 @@ import com.studica.frc.AHRS;
 
 
 public class DriveSubsystem extends SubsystemBase {
-  AHRS ahrs = new AHRS(AHRS.NavXComType.kMXP_SPI);;  
-  
+  AHRS ahrs = new AHRS(AHRS.NavXComType.kMXP_SPI);
+ 
+ 
   public static final SwerveDriveKinematics kDriveKinematics = new SwerveDriveKinematics(
         new Translation2d(Constants.kWheelBase / 2, Constants.kTrackWidth / 2),
         new Translation2d(Constants.kWheelBase / 2, -Constants.kTrackWidth / 2),
@@ -58,13 +59,12 @@ public class DriveSubsystem extends SubsystemBase {
     
 
   // The gyro sensor
-  private final ADIS16470_IMU m_gyro = new ADIS16470_IMU();
+  
 
   // Slew rate filter variables for controlling lateral acceleration
   private double m_currentRotation = 0.0;
   private double m_currentTranslationDir = 0.0;
   private double m_currentTranslationMag = 0.0;
-
   private SlewRateLimiter m_magLimiter = new SlewRateLimiter(1.8); // percent per second (1 = 100%)
   private SlewRateLimiter m_rotLimiter = new SlewRateLimiter(2.0); // percent per second (1 = 100%)
   private double m_prevTime = WPIUtilJNI.now() * 1e-6;
@@ -86,8 +86,7 @@ public class DriveSubsystem extends SubsystemBase {
   /** Creates a new DriveSubsystem. */
   
   public DriveSubsystem() {
-    m_frontLeft.invertTalon();
-    m_rearLeft.invertTalon();
+    //ahrs.setAngleAdjustment(180);
   }
 
   @Override
@@ -168,7 +167,7 @@ public class DriveSubsystem extends SubsystemBase {
 
     var swerveModuleStates = kDriveKinematics.toSwerveModuleStates(
         fieldRelative
-            ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeedDelivered, ySpeedDelivered, rotDelivered, Rotation2d.fromDegrees(ahrs.getAngle()))
+            ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeedDelivered, ySpeedDelivered, rotDelivered, Rotation2d.fromDegrees(-ahrs.getAngle()))
             : new ChassisSpeeds(xSpeedDelivered, ySpeedDelivered, rotDelivered));
     SwerveDriveKinematics.desaturateWheelSpeeds(
         swerveModuleStates, Constants.kMaxSpeedMetersPerSecond);
@@ -178,6 +177,8 @@ public class DriveSubsystem extends SubsystemBase {
     m_rearRight.setDesiredState(swerveModuleStates[3]);
 
     SmartDashboard.putNumber("gyroAngle", ahrs.getAngle());
+    SmartDashboard.putNumber("gyro pitch", ahrs.getPitch());
+    SmartDashboard.putNumber("gyro Yaw", ahrs.getYaw());
   }
   
 

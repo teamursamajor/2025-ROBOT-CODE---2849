@@ -7,7 +7,11 @@ package frc.robot;
 import frc.robot.Constants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
+//import frc.robot.commands.AprilTag.AprilTagTempTest;
 import frc.robot.commands.AprilTag.AprilTagTestCommand;
+import frc.robot.commands.AprilTag.AprilTagTestCommand2;
+import frc.robot.commands.AprilTag.AprilTagTestCommand3;
+import frc.robot.commands.Auto.LeaveCommand;
 import frc.robot.commands.Climb.ClimbDownCommand;
 import frc.robot.commands.Climb.ClimbLockCommand;
 import frc.robot.commands.Climb.ClimbUnlockCommand;
@@ -27,6 +31,7 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -50,15 +55,15 @@ public class RobotContainer {
   public final double kPThetaController = 1;
   public final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
   public final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI;
-  public final double kDriveDeadband = 0.5;
+  public final double kDriveDeadband = 0.1;
   
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  //public DriveSubsystem m_robotDrive = new DriveSubsystem(); 
-  //private AprilTagSubsystem m_aprilTag = new AprilTagSubsystem();
-  private final ClimbSubsystem climbsubsys = new ClimbSubsystem();
+  public DriveSubsystem m_robotDrive = new DriveSubsystem(); 
+  private AprilTagSubsystem m_aprilTag = new AprilTagSubsystem();
+  //private final ClimbSubsystem climbsubsys = new ClimbSubsystem();
   //private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();  
-  private final CoralSubsystem coralSubsystem = new CoralSubsystem();
+  //private final CoralSubsystem coralSubsystem = new CoralSubsystem();
 
   
   // The driver's controller(s)
@@ -73,7 +78,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
-     /* 
+     
      // Configure default commands
      /*m_robotDrive.setDefaultCommand(
         // The left stick controls translation of the robot.
@@ -87,7 +92,7 @@ public class RobotContainer {
                 true),
             m_robotDrive));
       */
-      
+       
   }
             
 
@@ -108,12 +113,20 @@ public class RobotContainer {
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
     //Constants.xboxController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
-    
+    //m_robotDrive.drive(1, 0.0, 0.0, false);
+
     // Climb
-    Constants.xboxController.y().whileTrue(new ClimbUpCommand(climbsubsys));
-    Constants.xboxController.a().whileTrue(new ClimbDownCommand(climbsubsys));
-    Constants.xboxController.x().onTrue(new ClimbUnlockCommand(climbsubsys)).onTrue(new ClimbUpCommand(climbsubsys));
-    Constants.xboxController.b().onTrue(new ClimbLockCommand(climbsubsys));
+    //Constants.xboxController.y().whileTrue(new WaitCommand(1).andThen(new ClimbUpCommand(climbsubsys))).onTrue(new ClimbUnlockCommand(climbsubsys));
+    //Constants.xboxController.a().whileTrue(new WaitCommand(1).andThen(new ClimbDownCommand(climbsubsys))).onTrue(new ClimbUnlockCommand(climbsubsys));
+    //Constants.xboxController.b().onTrue(new ClimbUpCommand(climbsubsys));
+
+    //Constants.xboxController.x().onTrue(new ClimbUnlockCommand(climbsubsys));//.onTrue(new ClimbUpCommand(climbsubsys));
+    //Constants.xboxController.b().onTrue(new ClimbLockCommand(climbsubsys));
+
+    // april tag
+    //Constants.xboxController.x().onTrue(new AprilTagTestCommand(m_aprilTag, m_robotDrive, 2));
+    //Constants.xboxController.b().onTrue(new AprilTagTestCommand2(m_robotDrive, m_aprilTag));
+    Constants.xboxController.b().onTrue(new AprilTagTestCommand3(m_robotDrive, m_aprilTag));
 
     // Elevator
     //Constants.xboxController.a().onTrue(new ElevatorUp(elevatorSubsystem));
@@ -134,7 +147,8 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Autos.exampleAuto(m_exampleSubsystem);
+    //return new LeaveCommand(m_robotDrive);
+    return new ExampleCommand(m_exampleSubsystem);
 
   }
 }

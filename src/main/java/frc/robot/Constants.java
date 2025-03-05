@@ -38,15 +38,19 @@ public final class Constants {
   public static final int kFrontLeftDrivingTalonId = 2;
   public static final int kBackLeftDrivingTalonId = 3;
 
-  public static final int kFrontLeftTurningId = 3;
-  public static final int kFrontRightTurningId = 7;
+  // public static final int kFrontLeftTurningId = 3;
+  // public static final int kFrontRightTurningId = 7;
+  // public static final int kBackLeftTurningId = 5;
+  // public static final int kBackRightTurningId = 2; 
+  public static final int kFrontLeftTurningId = 7;
+  public static final int kFrontRightTurningId = 9;
   public static final int kBackLeftTurningId = 5;
-  public static final int kBackRightTurningId = 2; 
+  public static final int kBackRightTurningId = 6; 
 
   //Driving Constants
   public static final double kDirectionSlewRate = 1.2; // radians per second
   public static final double kMaxSpeedMetersPerSecond = 4.8;
   public static final double kMaxAngularSpeed = 2 * Math.PI; // radians per second
-  public static final boolean kGyroReversed = false;
+  public static final boolean kGyroReversed = true;
   
 }

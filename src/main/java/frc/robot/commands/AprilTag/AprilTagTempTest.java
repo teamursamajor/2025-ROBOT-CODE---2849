@@ -6,17 +6,17 @@ import frc.robot.subsystems.AprilTag.AprilTagAlign;
 import frc.robot.subsystems.AprilTag.AprilTagSubsystem;
 import frc.robot.subsystems.Drive.DriveSubsystem;
 
-public class AprilTagTestCommand2 extends Command {
+public class AprilTagTempTest extends Command {
 
 
 
     AprilTagSubsystem aprilTag = new AprilTagSubsystem();
 
-    DriveSubsystem m_drive;
+    //DriveSubsystem m_drive;
 
-    public AprilTagTestCommand2(DriveSubsystem m_drive, AprilTagSubsystem apriltag){
+    public AprilTagTempTest(AprilTagSubsystem apriltag){
         this.aprilTag = apriltag;
-        this.m_drive = m_drive;
+        //this.m_drive = m_drive;
     }
 
     private double yDesiredDistance = 0;
@@ -98,25 +98,25 @@ public class AprilTagTestCommand2 extends Command {
 
     public void alignY(AprilTagAlign target) {
         double direction = Math.signum(yDesiredDistance - target.getDistanceY()) * 0.5;
-        m_drive.drive(0, direction, 0.0, false);
+        //m_drive.drive(0, direction, 0.0, false);
     }
 
     public void alignYaw(AprilTagAlign target) {
 
         double rot = Math.signum(target.getYaw()) * -1;
         rot *= 0.5;
-        m_drive.drive(0.0, 0.0, rot, false);
+        //m_drive.drive(0.0, 0.0, rot, false);
     }
 
     public void alignX(AprilTagAlign target) {
         double direction = Math.signum(xDesiredDistance - target.getDistanceX()) * 0.5;
-        m_drive.drive(direction, 0.0, 0.0, false);
+        //m_drive.drive(direction, 0.0, 0.0, false);
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        m_drive.drive(0, 0, 0, false);
+        //m_drive.drive(0, 0, 0, false);
     }
 
     // Returns true when the command should end.

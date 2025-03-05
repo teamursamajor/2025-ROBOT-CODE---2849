@@ -29,8 +29,8 @@ import edu.wpi.first.wpilibj.motorcontrol.Spark;
 public class CoralSubsystem extends SubsystemBase {
   
 
-    SparkMax Motor1 = new SparkMax(3, MotorType.kBrushless);
-    SparkMax Motor2 = new SparkMax(7, MotorType.kBrushless);
+   SparkMax Motor1 = new SparkMax(3, MotorType.kBrushless);
+   SparkMax Motor2 = new SparkMax(7, MotorType.kBrushless);
     Spark Motor3 = new Spark(3);
 
     

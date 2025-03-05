@@ -8,6 +8,7 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.wpilibj.ADIS16470_IMU.IMUAxis;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.motorcontrol.Talon;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import edu.wpi.first.wpilibj.Timer;
@@ -26,36 +27,41 @@ public class ClimbSubsystem extends SubsystemBase{
     
 
 
-    private Spark motor = new Spark(1);
-    private Servo servo = new Servo(0);
+    private Spark motor = new Spark(4);
+    private Servo servo = new Servo(9);
+
 
 
     public ClimbSubsystem(){
+        servo.setBoundsMicroseconds(2000, 1800, 1500, 1200, 1000);
+        
     }
     
     public void lockServo() {
         //servo.setSpeed(1.0);
-        servo.set(0.1);
-        //System.out.println("lock");
+        servo.set(0.2);
+        System.out.println("lock");
     }
     public void unlockServo(){
         //servo.setSpeed(-1.0);
-        servo.set(0.5);
-        //System.out.println("unlock");
+        servo.set(0.4);
+        System.out.println("unlock");
     }
 
     public void climbUp (){
-        motor.set(.25);
+        motor.set(-.25);
     }
 
     public void climbDown(){
-        motor.set(-.25);
+        motor.set(.25);
     }
     public void stopClimb(){
+        System.out.println("climb stopped");
         motor.set(0);
      
    }
    public double getPosition(){
-    return servo.getPosition();
+    //SmartDashboard.putNumber("Servo Position", servo.get());
+    return servo.get();
    }
 }

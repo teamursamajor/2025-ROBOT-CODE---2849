@@ -5,6 +5,7 @@ import org.photonvision.PhotonUtils;
 import org.photonvision.targeting.PhotonPipelineResult;
 import org.photonvision.targeting.PhotonTrackedTarget;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.util.Units;
@@ -16,9 +17,9 @@ import java.util.*;
 
 public class AprilTagSubsystem extends SubsystemBase {
     //double cameraHeight = Units.inchesToMeters(57.75);
-    double testHeight = Units.inchesToMeters(3.375);
-    double testcamHeight = Units.inchesToMeters(6.75);
-    double cameraPitchRadians = Units.degreesToRadians(-5); // Angle between horizontal and the camera.
+    double testHeight = Units.inchesToMeters(23.5);
+    double testcamHeight = Units.inchesToMeters(19);
+    double cameraPitchRadians = Units.degreesToRadians(0); // Angle between horizontal and the camera.
 
     PhotonCamera camera = new PhotonCamera("Arducam_OV9281_USB_Camera"); // Change to camera name
     
@@ -32,7 +33,7 @@ public class AprilTagSubsystem extends SubsystemBase {
         // Vision-alignment mode
         // Query the latest result from PhotonVision
         List <PhotonPipelineResult> results = camera.getAllUnreadResults();
-
+       
         
         double yaw = Double.MAX_VALUE;
         double pitch = Double.MAX_VALUE;
@@ -47,11 +48,12 @@ public class AprilTagSubsystem extends SubsystemBase {
             if(result.hasTargets()){
                 PhotonTrackedTarget target = result.getBestTarget();
                 Transform3d bestCameraToTarget = target.getBestCameraToTarget();
-                System.out.println("X:" + Units.metersToInches(bestCameraToTarget.getX()));
+                //System.out.println("X:" + Units.metersToInches(bestCameraToTarget.getX()));
                 yaw = target.getYaw();
                 pitch = target.getPitch();
                 id = target.getFiducialId();
                 distanceX = bestCameraToTarget.getX();
+                distanceY = bestCameraToTarget.getY();
                 SmartDashboard.putNumber("DistanceX", distanceX);
                 SmartDashboard.putNumber("DistanceX", distanceY);
                 SmartDashboard.putNumber("Yaw", yaw);
