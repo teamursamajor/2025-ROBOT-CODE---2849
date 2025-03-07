@@ -3,10 +3,14 @@ package frc.robot.commands.Coral;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Coral.CoralSubsystem;
 
-public class IncreaseAngle extends Command{
+public class IntakeAngle extends Command{
     private final CoralSubsystem coral;
+    private double intakeAngle = 55;
+    private double speed = 0.5;
+    private boolean isFinished = false;
+    private double angleMargin = 2;
 
-    public IncreaseAngle(CoralSubsystem coral){
+    public IntakeAngle(CoralSubsystem coral){
         this.coral = coral;
         addRequirements(coral);
     }
@@ -18,7 +22,14 @@ public class IncreaseAngle extends Command{
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    coral.increaseAngle();
+    if(coral.getAngle() > intakeAngle + angleMargin){
+      coral.setAngleMotor(-speed);
+    } else if (coral.getAngle() < intakeAngle - angleMargin){
+      coral.setAngleMotor(speed);
+    } else {
+      isFinished = true;
+    }
+    
   }
 
   // Called once the command ends or is interrupted.
@@ -30,7 +41,7 @@ public class IncreaseAngle extends Command{
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return isFinished;
   }
 
 }
